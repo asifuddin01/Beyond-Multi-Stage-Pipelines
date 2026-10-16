@@ -10,7 +10,8 @@ import torch.nn.functional as F
 class FocalBCE(nn.Module):
     def __init__(self, gamma: float = 2.0, pos_weight: torch.Tensor | None = None):
         super().__init__()
-        self.gamma, self.pos_weight = gamma, pos_weight
+        self.gamma = gamma
+        self.register_buffer("pos_weight", pos_weight)   # moves with .to(device)
 
     def forward(self, logits, targets):
         p = torch.sigmoid(logits)

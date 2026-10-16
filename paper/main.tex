@@ -60,9 +60,8 @@ cascade's macro-AUC to 0.747. Label-correlation modeling gives the largest singl
 gain, raising the detection rate from 0.621 to 0.682 (0.689 with test-time
 augmentation). Blending the flat and label-correlation models under four-view
 test-time augmentation is the best configuration on six of eight metrics (exact
-match 0.694, micro-F1 0.678, macro-F1 0.456, macro-AUC 0.972). On
-definition-matched class subsets it matches or exceeds four recent studies,
-most clearly on low-support pathologies. We also show that ensembling a gated
+match 0.694, micro-F1 0.678, macro-F1 0.456, macro-AUC 0.972). On definition-matched class subsets it matches or exceeds four recent studies on
+macro- and micro-F1, most clearly on low-support pathologies. We also show that ensembling a gated
 cascade with continuous-output models is harmful, and that per-source negative
 sampling is needed to remove a dataset shortcut that otherwise yields a spurious
 AUC of 1.000.
@@ -124,7 +123,7 @@ publicly released.
 \section{Related Work}
 %% ======================================================================
 \textbf{Multi-disease fundus classification.} RFMiD~\cite{pachade2021} and
-RFMiD~2.0~\cite{panchal2023} annotate 45 and 50 conditions, and ODIR-5K~\cite{odir}
+RFMiD~2.0~\cite{panchal2023} annotate 46 and 49 conditions, and ODIR-5K~\cite{odir}
 provides eight categories with per-eye diagnostic keywords. Cen \emph{et
 al.}~\cite{cen2021} detected 39 conditions with a hierarchical ensemble trained on a
 large private corpus. On public data, Rodr\'iguez \emph{et al.}~\cite{rodriguez2022}
@@ -165,8 +164,8 @@ are standard ways to stabilize predictions.
 Source & Train & Val & Test & Native labels\\
 \midrule
 ODIR-5K (per eye)~\cite{odir} & 6{,}092 & 861 & 1{,}642 & 8 categories + keywords\\
-RFMiD~1.0~\cite{pachade2021} & 1{,}920 & 640 & 640 & 45 conditions\\
-RFMiD~2.0~\cite{panchal2023} & 508 & 177 & 172 & 50 conditions\\
+RFMiD~1.0~\cite{pachade2021} & 1{,}920 & 640 & 640 & 46 conditions\\
+RFMiD~2.0~\cite{panchal2023} & 508 & 177 & 172 & 49 conditions\\
 \midrule
 Merged & 8{,}520 & 1{,}678 & 2{,}454 & 39 scored targets\\
 \quad of which healthy & 3{,}652 & 617 & 1{,}005 & \\
@@ -257,7 +256,7 @@ and mild color jitter. Multi-label models use binary cross-entropy with a
 per-class positive weight $w_c=\min(\max(N^-_c/N^+_c,1),50)$. Optimization is
 AdamW~\cite{loshchilov2019} (weight decay $10^{-2}$) with linear warm-up and cosine
 decay, mixed precision, gradient clipping at 1.0, batch size 4 with gradient
-accumulation, and early stopping on the validation monitor. Decision thresholds are
+accumulation, and early stopping on the validation monitor. For the 39-target models, decision thresholds are
 tuned per class on \emph{validation} by maximizing F1 over $\{0.05,0.075,\dots,0.95\}$
 for every target with at least ten validation positives (22 of 39); the others use
 0.5. The test split is used once. Table~\ref{tab:hparams} lists the per-model
@@ -409,7 +408,8 @@ split is lost. The two coarse gates account for 34.2\% of all instances.}
 \end{figure}
 
 \textbf{Gated zeros invalidate rank metrics.} The cascade's macro-AUC is 0.747
-although its group and disease classifiers individually exceed 0.90 on validation.
+although its six clinical-group outputs and its six group classifiers all exceed
+0.90 macro-AUC on validation (Table~\ref{tab:groups}).
 A true positive discarded at a gate receives a hard score of 0.000 and is ranked
 below every true negative with a small non-zero score, which breaks the probability
 ordering that AUC and AP measure. Decision-based metrics (F1, exact match,
@@ -510,9 +510,9 @@ diabetic retinopathy makes exudates and cotton-wool spots more findable).
 precision-oriented flat model with the recall-oriented label-correlation model
 (row 9) is best on six of eight metrics: exact match 0.694, Jaccard 0.740, micro-F1
 0.678, macro-F1 0.456, well-supported macro-F1 0.594 and macro-AUC 0.972. In
-contrast, averaging the cascade with the flat model (row 5) is worse than the flat
-model alone on micro-F1 (0.654 vs.\ 0.665 for row 3) and detection, and the
-three-way ensemble (row 8) is worse still (micro-F1 0.646, detection 0.574). The
+contrast, averaging the cascade with the flat model (row 5) is worse than its flat partner
+(row 3) on micro-F1 (0.654 vs.\ 0.665) and detection (0.593 vs.\ 0.649), and the
+three-way ensemble (row 8) is worse still (micro-F1 0.645, detection 0.574). The
 cascade's sparse output matrix suppresses its partners' probabilities precisely on
 the diseased images its gates discarded. We report this as a negative result:
 gated pipelines are unsuitable members of probability-averaging ensembles.
@@ -569,11 +569,11 @@ Fig.~\ref{fig:perdisease} and Table~\ref{tab:pertarget} show that the best confi
 frequent targets; the cascade remains competitive on cataract (CAT), media haze (MH)
 and chorioretinitis (CRS), where its group specialists see a narrower problem.
 The best configuration exceeds an F1 of 0.80 on cataract (0.840), myopia (0.838) and
-laser scars (0.813) and reaches 0.785 on diabetic retinopathy, but hypertensive
+laser scars (0.812) and reaches 0.785 on diabetic retinopathy, but hypertensive
 retinopathy (0.286) and macular scar (0.154) remain hard, and six ultra-low-support
-targets (PRH, AION, PT, ST, MCA, CF; $\leq 7$ test positives) are never detected.
-Performance also depends on the source (Table~\ref{tab:source}): every model
-scores best on ODIR-5K, whose eight-category labels are coarse, and worst on
+targets (PRH, AION, PT, ST, MCA, CF; $\leq 7$ test positives) are never correctly detected.
+Performance also depends on the source (Table~\ref{tab:source}): both models
+score best on ODIR-5K, whose eight-category labels are coarse, and worst on
 RFMiD~2.0, whose 172 test images carry the richest and rarest label sets.
 
 \begin{table}[t]
@@ -629,9 +629,10 @@ ASL cascade~\cite{saikia2026} & RFMiD & 26 & \B{.478} / .476 & \B{.702} / .626 &
 \end{table}
 
 The best configuration matches or exceeds every comparator on macro-F1 and micro-F1
-wherever they are reported; the margin is largest against the twelve-model
-benchmark~\cite{dey2026} (+0.138 macro-F1, +0.193 micro-F1) and smallest against the
-asymmetric-loss cascade~\cite{saikia2026}, with which macro-F1 and macro-AP are
+wherever they are reported; the margins are largest against the dual-CNN model~\cite{mahmood2026} (+0.254
+macro-F1, +0.178 micro-F1) and the twelve-model benchmark~\cite{dey2026} (+0.138
+macro-F1, +0.193 micro-F1), and smallest against the asymmetric-loss
+cascade~\cite{saikia2026}, with which macro-F1 and macro-AP are
 essentially tied. 
 \begin{table}[t]
 \centering

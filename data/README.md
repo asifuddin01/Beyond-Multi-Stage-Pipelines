@@ -5,8 +5,8 @@ The study merges three public fundus datasets and keeps each one's official spli
 | Source | Train | Val | Test | Native labels |
 |---|---|---|---|---|
 | ODIR-5K (per-eye images) | 6,092 | 861 | 1,642 | 8 categories + diagnostic keywords |
-| RFMiD 1.0 | 1,920 | 640 | 640 | 45 conditions |
-| RFMiD 2.0 | 508 | 177 | 172 | 50 conditions |
+| RFMiD 1.0 | 1,920 | 640 | 640 | 46 conditions |
+| RFMiD 2.0 | 508 | 177 | 172 | 49 conditions |
 | **Merged** | **8,520** | **1,678** | **2,454** | → 39 scored targets |
 
 ```
