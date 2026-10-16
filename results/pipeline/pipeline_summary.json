@@ -1,0 +1,64 @@
+{
+  "note": "Three-stage cascade on the 2,454-image test split (Stage-1 threshold 0.5). Metrics here are the cascade's own decisions; the ablation table scores its saved probabilities at 0.5.",
+  "stage1_test": {
+    "accuracy": 0.8517,
+    "auc": 0.9283,
+    "precision": 0.945,
+    "recall": 0.795,
+    "f1": 0.8636,
+    "confusion": [
+      [
+        938,
+        67
+      ],
+      [
+        297,
+        1152
+      ]
+    ]
+  },
+  "stage2_test_isolated_macro_auc": 0.955,
+  "end_to_end": {
+    "exact_acc": 0.687,
+    "jaccard": 0.7268,
+    "micro_f1": 0.6451,
+    "macro_f1": 0.3922,
+    "macro_f1_well_supported": 0.5296,
+    "macro_precision": 0.4902,
+    "macro_recall": 0.3797,
+    "instances_found": 1015,
+    "instances_total": 1719,
+    "detection": 0.5905
+  },
+  "loss_cascade": {
+    "lost_stage1": 319,
+    "lost_stage2": 269,
+    "lost_stage3": 116,
+    "found": 1015,
+    "total": 1719
+  },
+  "per_image_outcome": {
+    "correct_no_disease": 942,
+    "perfect_exact_set": 744,
+    "total_miss": 492,
+    "partial": 213,
+    "false_alarm": 63
+  },
+  "per_source": {
+    "odir": {
+      "n": 1642,
+      "macro_f1": 0.6142,
+      "detection": 0.611
+    },
+    "rfmid1": {
+      "n": 640,
+      "macro_f1": 0.3347,
+      "detection": 0.602
+    },
+    "rfmid2": {
+      "n": 172,
+      "macro_f1": 0.2717,
+      "detection": 0.447
+    }
+  }
+}

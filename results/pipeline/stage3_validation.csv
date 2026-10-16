@@ -1,0 +1,8 @@
+model,group,classes,train_images,val_images,val_macro_auc,val_macro_ap
+G1,Vascular,9,2554,480,0.9708,0.6729
+G2,Exudative,9,698,188,0.9261,0.5818
+G3,Optic disc,7,806,194,0.9421,0.6597
+G4,Structural,6,694,193,0.9825,0.9187
+G5 (positives only),Media,2,656,157,1.0,1.0
+G5 (source-balanced negatives),Media,2,1312,314,0.9832,0.9479
+G6,Inflammatory,5,162,51,0.9512,0.8583

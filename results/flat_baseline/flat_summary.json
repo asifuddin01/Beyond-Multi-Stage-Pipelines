@@ -1,0 +1,30 @@
+{
+  "exact_acc": 0.6789,
+  "jaccard_all": 0.7229,
+  "jaccard_diseased": 0.5983,
+  "hamming": 0.9887,
+  "micro_f1": 0.6642,
+  "macro_f1": 0.4426,
+  "macro_precision": 0.5332,
+  "macro_recall": 0.414,
+  "instances_found": 1067,
+  "instances_total": 1719,
+  "detection": 0.6207,
+  "per_source": {
+    "odir": {
+      "n": 1642,
+      "macro_f1": 0.6247,
+      "exact": 0.746
+    },
+    "rfmid1": {
+      "n": 640,
+      "macro_f1": 0.3751,
+      "exact": 0.5656
+    },
+    "rfmid2": {
+      "n": 172,
+      "macro_f1": 0.3192,
+      "exact": 0.4593
+    }
+  }
+}
