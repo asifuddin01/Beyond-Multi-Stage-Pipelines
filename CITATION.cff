@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Does Hierarchy Help? A Controlled Comparison of Cascaded, Flat and Label-Correlation Models for Multi-Label Retinal Fundus Disease Classification"
+abstract: "Code, harmonization rules and released test-set predictions for a controlled comparison of a three-stage gated cascade, a flat classifier and a label-correlation transformer decoder on a unified 39-target retinal fundus label space built from RFMiD 1.0, RFMiD 2.0 and ODIR-5K."
+authors:
+  - given-names: "Md Asif"
+    family-names: "Uddin"
+    affiliation: "BRAC University"
+    orcid: "https://orcid.org/0009-0000-1705-4097"
+  - given-names: "Jannatul"
+    family-names: "Ferdous"
+    affiliation: "BRAC University"
+  - given-names: "Asif"
+    family-names: "Islam"
+    affiliation: "BRAC University"
+  - given-names: "Zobaer Mahmud"
+    family-names: "Zisan"
+    affiliation: "BRAC University"
+  - given-names: "Promit"
+    family-names: "Ghosh"
+    affiliation: "BRAC University"
+  - given-names: "Shah Ahafik"
+    family-names: "Arman"
+    affiliation: "BRAC University"
+  - given-names: "Niloy"
+    family-names: "Farhan"
+    affiliation: "BRAC University"
+  - given-names: "Rafeed"
+    family-names: "Rahman"
+    affiliation: "BRAC University"
+repository-code: "https://github.com/asifuddin01/Beyond-Multi-Stage-Pipelines"
+license: MIT
+version: "1.0.0"
+date-released: "2026-10-29"
+keywords:
+  - retinal fundus imaging
+  - multi-label classification
+  - hierarchical cascade
+  - label correlation
+  - transformer decoder
+identifiers:
+  - type: other
+    value: "arXiv:2610.23747"
+    description: "arXiv preprint of the accompanying paper"
