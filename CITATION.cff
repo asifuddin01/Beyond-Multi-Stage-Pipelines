@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
-title: "Does Hierarchy Help? A Controlled Comparison of Cascaded, Flat and Label-Correlation Models for Multi-Label Retinal Fundus Disease Classification"
+title: "Comparing Cascaded, Flat, and Label-Correlation Models for Multi-Label Retinal Disease Classification in Fundus Images"
 abstract: "Code, harmonization rules and released test-set predictions for a controlled comparison of a three-stage gated cascade, a flat classifier and a label-correlation transformer decoder on a unified 39-target retinal fundus label space built from RFMiD 1.0, RFMiD 2.0 and ODIR-5K."
 authors:
   - given-names: "Md Asif"
